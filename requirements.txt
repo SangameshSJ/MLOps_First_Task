@@ -1,2 +1,1 @@
-# requirements.txt
-nltk
+nltk==3.6.7

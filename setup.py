@@ -1,20 +1,15 @@
-# setup.py
-
 from setuptools import setup, find_packages
+with open("requirements.txt") as f:
+    required = f.read().splitlines()
 
 setup(
     name="simplechatbot",
     version="0.1",
-    description="A simple chatbot package",
-    author="Your Name",
-    author_email="your.email@example.com",
     packages=find_packages(),
-    install_requires=[
-        "nltk"
-    ],
+    install_requires=required,  # Automatically installs dependencies
     entry_points={
         "console_scripts": [
-            "chatbot = chatbot.chatbot:chatbot"
-        ]
+            "chatbot = chatbot.chatbot:chatbot",
+        ],
     },
 )

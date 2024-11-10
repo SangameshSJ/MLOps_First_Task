@@ -1,35 +1,29 @@
-# chatbot/chatbot.py
+import nltk
+from nltk.tokenize import word_tokenize
 
-import re
-import datetime
+nltk.download("punkt")
 
-RESPONSES = {
-    "greeting": ["Hello! How can I assist you today?", "Hi there! What can I help you with?"],
-    "business_hours": "Our business hours are from 9 AM to 5 PM, Monday through Friday.",
-    "goodbye": ["Goodbye! Have a great day!", "See you later!"],
-    "thanks": ["You're welcome!", "Glad to help!"]
-}
+def preprocess_input(user_input):
+    tokens = word_tokenize(user_input.lower())
+    return tokens
 
 def get_response(user_input):
-    user_input = user_input.lower()  # Lowercase input for easier matching
-
-    if re.search(r"\b(hello|hi|hey)\b", user_input):
-        return RESPONSES["greeting"][0]
-    elif re.search(r"\b(hours|time|open|close|business)\b", user_input):
-        return RESPONSES["business_hours"]
-    elif re.search(r"\b(thanks|thank you|appreciate)\b", user_input):
-        return RESPONSES["thanks"][0]
-    elif re.search(r"\b(bye|goodbye|see you)\b", user_input):
-        return RESPONSES["goodbye"][0]
+    tokens = preprocess_input(user_input)
+    if "hello" in tokens:
+        return "Hi there! How can I help you today?"
+    elif "thanks" in tokens:
+        return "You're welcome!"
+    elif "bye" in tokens:
+        return "Goodbye!"
     else:
-        return "I'm not sure about that. Could you ask something else?"
+        return "I'm here to help with any questions you have."
 
 def chatbot():
     print("Welcome to the Chatbot! Type 'exit' to end the chat.")
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
-            print("Chatbot: Goodbye! Have a nice day.")
+            print("Chatbot: Goodbye!")
             break
         response = get_response(user_input)
         print(f"Chatbot: {response}")
