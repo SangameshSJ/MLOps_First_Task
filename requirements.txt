@@ -1,2 +1,0 @@
-I created a Python module for a simple chatbot, built a wheel package for it, installed the package, and tested it. 
-The wheel package was configured to automatically install its dependencies upon installation.
